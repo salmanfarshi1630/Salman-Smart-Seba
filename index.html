@@ -71,7 +71,7 @@ table{width:100%;border-collapse:collapse;min-width:700px}th,td{text-align:left;
 <div id="modal" class="modal hide"><div class="modalbox"><div class="modalhead"><h2 id="mtitle"></h2><button class="close" onclick="Modal.close()">×</button></div><div id="mbody"></div></div></div>
 
 <script>
-const CFG={ADMIN_EMAIL:"salmanfarshi1630@gmail.com",ADMIN_PASSWORD:"CHANGE_THIS_ADMIN_PASSWORD",USERS:"sss_users",APPS:"sss_apps",SESSION:"sss_session",DCV:"sss_draft_cv",DQR:"sss_draft_qr"};
+const CFG={ADMIN_EMAIL:"salmanfarshi1630@gmail.com",ADMIN_PASSWORD:"salman135",USERS:"sss_users",APPS:"sss_apps",SESSION:"sss_session",DCV:"sss_draft_cv",DQR:"sss_draft_qr"};
 const S={get(k,d=[]){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){localStorage.setItem(k,JSON.stringify(v))},del(k){localStorage.removeItem(k)},id(){return"app_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,7)},now(){return new Date().toISOString()}};
 const esc=x=>String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 const status=s=>{let c={pending:"pending",under_review:"review",need_correction:"correction",approved:"approved",rejected:"rejected",completed:"completed"}[s]||"pending";return`<span class="badge ${c}">${({pending:"Pending",under_review:"Under Review",need_correction:"Need Correction",approved:"Approved",rejected:"Rejected",completed:"Completed"})[s]||s}</span>`};
