@@ -1,135 +1,305 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Salman Smart Service</title>
+<meta name="description" content="Salman Smart Service — CV, Biodata and QR Code services">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kalpurush&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
 <style>
-:root{--p:#0b5d4b;--p2:#087f5b;--g:#d6a84f;--bg:#f4f7f6;--txt:#10231e;--mut:#64748b;--line:#dce7e3;--red:#b42318;--sh:0 12px 35px #0b5d4b18}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font-family:Kalpurush,Inter,Arial,sans-serif}.hide{display:none!important}
-nav{position:sticky;top:0;z-index:20;background:#ffffffed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.nav{max-width:1180px;margin:auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}.brand{font-weight:800;color:var(--p);display:flex;align-items:center;gap:9px}.logo{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;display:grid;place-items:center}.actions{display:flex;gap:7px;flex-wrap:wrap}
-main{max-width:1180px;margin:auto;padding:20px 14px 50px}.hero{border-radius:24px;padding:40px 25px;color:#fff;background:linear-gradient(135deg,#073e33,#0b5d4b 55%,#128064);box-shadow:var(--sh)}.hero h1{font-size:clamp(28px,5vw,48px);margin:0 0 5px}.hero p{margin:6px 0;opacity:.92}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--sh);margin-top:16px}.service{display:flex;flex-direction:column}.service i{font-size:23px;color:var(--p);background:#e8f4f0;width:48px;height:48px;border-radius:13px;display:grid;place-items:center;margin-bottom:10px}.service p{color:var(--mut);flex:1}
-button{font:inherit;cursor:pointer}.btn{border:0;border-radius:10px;padding:9px 14px;font-weight:700;display:inline-flex;align-items:center;gap:7px;justify-content:center}.primary{background:var(--p);color:#fff}.outline{background:#fff;border:1px solid var(--line);color:var(--txt)}.danger{background:#fff0ef;color:var(--red);border:1px solid #ffd0cc}.sm{font-size:13px;padding:7px 10px}
-label{display:block;font-weight:700;font-size:14px;margin-bottom:5px}input,select,textarea{width:100%;border:1px solid #cddbd6;border-radius:9px;padding:10px 11px;font:inherit;outline:0;background:#fff}input:focus,select:focus,textarea:focus{border-color:var(--p);box-shadow:0 0 0 3px #0b5d4b12}textarea{min-height:90px;resize:vertical}.fg{margin-bottom:12px}.check{display:flex;align-items:center;gap:7px;font-weight:500}.check input{width:auto}.note{padding:11px 13px;border-radius:10px;background:#eef8f5;border:1px solid #cce8df;color:#155e4d;margin:10px 0}.warn{background:#fff3f2;border-color:#ffd0cc;color:#8f2118}.muted{font-size:12px;color:var(--mut)}
-table{width:100%;border-collapse:collapse;min-width:700px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f7faf9}.scroll{overflow:auto}.badge{padding:4px 8px;border-radius:99px;font-size:12px;font-weight:800}.pending{background:#fff3cf;color:#815600}.approved{background:#dcfce7;color:#166534}.correction{background:#fff0dd;color:#914d00}.rejected{background:#ffe4e6;color:#9f1239}.completed{background:#dbeafe;color:#1e40af}.review{background:#ede9fe;color:#5b21b6}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px}.stat b{font-size:27px;display:block}.stat small{color:var(--mut)}
-.dynamic{position:relative;border:1px dashed #c8d5d1;border-radius:13px;padding:13px;margin:10px 0}.remove{position:absolute;right:8px;top:8px}.tabs{display:flex;margin-bottom:15px}.tab{flex:1;padding:11px;border:0;background:#f2f6f4;font-weight:700}.active{background:#fff;color:var(--p);border-bottom:3px solid var(--p)}
-.modal{position:fixed;inset:0;background:#00150f88;z-index:100;display:grid;place-items:center;padding:12px}.modalbox{background:#fff;width:min(900px,100%);max-height:94vh;overflow:auto;border-radius:18px;padding:18px}.modalhead{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:#eef3f1;border-radius:50%;width:36px;height:36px}
-.qr{width:min(420px,100%);margin:15px auto;background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;text-align:center;box-shadow:var(--sh)}#qrcode{display:flex;justify-content:center;padding:14px}.qrinfo{text-align:left;border-top:1px solid var(--line);padding-top:10px}.qrinfo p{margin:6px 0}
-.cv{background:#fff;width:210mm;min-height:297mm;margin:auto;padding:15mm;font-family:Inter,Arial,sans-serif;color:#17221f}.cvhead{display:flex;justify-content:space-between;border-bottom:3px solid var(--p);padding-bottom:10px}.cv h1{margin:0;color:var(--p);font-size:28px}.cvsec{margin-top:13px}.cvsec h3{font-size:13px;color:var(--p);border-bottom:1px solid #d9e3e0;padding-bottom:4px}.cvgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px}.cv table{min-width:0;font-size:10px}.cv th,.cv td{padding:5px}.sign{margin-top:35px;margin-left:auto;width:140px;border-top:1px solid #333;text-align:center;font-size:10px;padding-top:4px}
-@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}.cv{width:100%;padding:7mm}}@media(max-width:580px){.grid,.grid2{grid-template-columns:1fr}.brand span{display:none}.hero{padding:30px 18px}.cvgrid{grid-template-columns:1fr}}
-@media print{nav,.no-print{display:none!important}body{background:#fff}.cv{box-shadow:none}}
+*{box-sizing:border-box}body{margin:0;font-family:Kalpurush,Inter,Arial,sans-serif;background:#f4f7fb;color:#172033}
+:root{--primary:#0b6b50;--primary2:#087f5b;--dark:#0d2330;--gold:#c79a3b;--danger:#c0392b;--muted:#667085;--card:#fff;--border:#e4e9ef}
+header{background:linear-gradient(135deg,var(--dark),#0b6b50);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 4px 18px #0002}
+.nav{max-width:1180px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-weight:800;font-size:20px}.brand small{display:block;font-size:11px;font-weight:400;opacity:.8}
+nav{display:flex;gap:6px;flex-wrap:wrap}button{font:inherit;cursor:pointer;border:0}
+.nav button,.lang{background:#ffffff18;color:#fff;padding:9px 12px;border-radius:9px}.nav button:hover{background:#ffffff30}
+.container{max-width:1180px;margin:auto;padding:24px 16px}.hero{padding:35px 0}.hero h1{font-size:clamp(28px,5vw,48px);margin:6px 0;color:var(--dark)}.hero p{color:var(--muted);font-size:17px}
+.bismillah{text-align:center;font-size:22px;color:var(--primary);margin:8px 0 22px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 8px 25px #183b530b}
+.card h3{margin-top:0}.service-icon{font-size:30px}.btn{padding:11px 16px;border-radius:10px;font-weight:700}.primary{background:var(--primary);color:#fff}.secondary{background:#edf7f3;color:var(--primary)}.danger{background:#fff0ef;color:var(--danger)}
+.hidden{display:none!important}.view{min-height:70vh}
+.form{max-width:900px;margin:auto;background:#fff;padding:22px;border-radius:16px;border:1px solid var(--border)}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.field label{display:block;font-weight:700;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid #ccd5df;border-radius:9px;font:inherit;background:#fff}.field textarea{min-height:90px;resize:vertical}.full{grid-column:1/-1}
+.section-title{margin:24px 0 12px;padding-bottom:8px;border-bottom:2px solid #eaf0f3;color:var(--primary)}
+table{width:100%;border-collapse:collapse;background:#fff}th,td{padding:11px;border-bottom:1px solid var(--border);text-align:left}th{background:#f7fafc}.table-wrap{overflow:auto}
+.badge{display:inline-block;padding:5px 9px;border-radius:20px;font-size:12px;font-weight:700;background:#eef2f6}.badge.approved{background:#e5f7ef;color:#087f5b}.badge.pending{background:#fff6db;color:#8a6500}.badge.rejected{background:#ffe9e7;color:#a93226}.badge.correction{background:#fff0db;color:#9a5a00}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{background:#fff;border:1px solid var(--border);padding:18px;border-radius:14px}.stat strong{font-size:27px;display:block;color:var(--primary)}
+.modal{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;padding:15px;z-index:100}.modal-box{background:#fff;border-radius:16px;max-width:760px;width:100%;max-height:92vh;overflow:auto;padding:22px}
+.qr-card{width:min(380px,100%);margin:18px auto;padding:24px;text-align:center;border:1px solid #dce5e8;border-radius:18px;background:#fff;box-shadow:0 12px 30px #0001}.qr-card h2{margin:5px 0}.qr-box{display:flex;justify-content:center;margin:18px}.qr-meta{color:#475467;line-height:1.7}.scan{font-size:12px;letter-spacing:2px;color:var(--primary);font-weight:800}
+footer{background:#0d2330;color:#fff;text-align:center;padding:24px;margin-top:35px}
+.notice{padding:12px 14px;background:#fff8df;border-left:4px solid #d6a62d;border-radius:8px;margin:12px 0;color:#665016}
+.empty{padding:30px;text-align:center;color:var(--muted)}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}nav{display:none}.nav{flex-wrap:wrap}}
+@media(max-width:480px){.container{padding:18px 11px}.stats{grid-template-columns:1fr 1fr}.card,.form{padding:16px}}
 </style>
 </head>
 <body>
-<nav><div class="nav"><div class="brand"><div class="logo"><i class="fa-solid fa-layer-group"></i></div><span>Salman Smart Service</span></div><div class="actions"><button class="btn outline sm" onclick="App.lang()">English</button><button id="adminNav" class="btn outline sm hide" onclick="App.show('admin')">Admin</button><button id="logoutNav" class="btn danger sm hide" onclick="Auth.logout()">Logout</button><button id="loginNav" class="btn primary sm" onclick="App.show('auth')">Login</button></div></div></nav>
-<main>
-<section id="home">
-<div class="hero"><h1>Salman Smart Service</h1><p>CV, Biodata & Professional QR Code Service</p><p>بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p></div>
+<header>
+<div class="nav">
+<div class="brand">Salman Smart Service<small>Professional Digital Service Platform</small></div>
+<nav>
+<button onclick="show('home')">হোম</button>
+<button onclick="show('services')">সার্ভিস</button>
+<button onclick="show('applications')">আমার আবেদন</button>
+<button id="adminNav" class="hidden" onclick="show('admin')">Admin</button>
+<button id="authNav" onclick="show('login')">Login</button>
+<button id="logoutNav" class="hidden" onclick="logout()">Logout</button>
+</nav>
+<button class="lang" onclick="toggleLang()">English</button>
+</div>
+</header>
+
+<main class="container">
+<section id="home" class="view">
+<div class="hero">
+<div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+<h1>Salman Smart Service</h1>
+<p>CV, Biodata এবং বিভিন্ন ধরনের Professional QR Code তৈরির সহজ ও সুন্দর সেবা।</p>
 <div class="grid">
-<div class="card service"><i class="fa-solid fa-file-lines"></i><h3>CV & Biodata</h3><p>Professional, Modern অথবা Minimal template-এ CV আবেদন করুন।</p><button class="btn primary" onclick="App.need('cv')">Apply Now</button></div>
-<div class="card service"><i class="fa-solid fa-qrcode"></i><h3>Smart QR Code</h3><p>bKash, Nagad, Social Media, WhatsApp, Website, Contact, Wi‑Fi ও Custom QR।</p><button class="btn primary" onclick="App.need('qr')">Create QR</button></div>
-<div class="card service"><i class="fa-solid fa-clock-rotate-left"></i><h3>My Applications</h3><p>আবেদন, correction, approval ও final QR/CV status দেখুন।</p><button class="btn outline" onclick="App.need('dash')">Dashboard</button></div>
-</div></section>
+<div class="card"><div class="service-icon">📄</div><h3>CV & Biodata</h3><p>তথ্য অনুযায়ী Professional CV তৈরি ও PDF ডাউনলোড।</p><button class="btn primary" onclick="requireLogin('cv')">আবেদন করুন</button></div>
+<div class="card"><div class="service-icon">🔳</div><h3>QR Code</h3><p>Payment, Social, WhatsApp, Website, Contact, Wi‑Fi ও Custom QR.</p><button class="btn primary" onclick="requireLogin('qr')">QR আবেদন করুন</button></div>
+<div class="card"><div class="service-icon">🛡️</div><h3>Secure Application</h3><p>নিজের আবেদন দেখা, status দেখা এবং Admin approval workflow।</p><button class="btn secondary" onclick="show('applications')">আমার আবেদন</button></div>
+</div>
+</div>
+</section>
 
-<section id="auth" class="hide"><div class="card" style="max-width:500px;margin:35px auto"><div class="tabs"><button id="lt" class="tab active" onclick="Auth.mode('login')">Login</button><button id="st" class="tab" onclick="Auth.mode('signup')">Create Account</button></div><h2 id="authTitle">Login</h2><form onsubmit="Auth.submit(event)"><div class="fg"><label>Email / Gmail</label><input id="email" type="email" required></div><div class="fg"><label>Password</label><input id="pass" type="password" required minlength="6"></div><div id="signupBox" class="hide"><div class="fg"><label>Full Name</label><input id="uname"></div><div class="fg"><label>Mobile</label><input id="uphone"></div></div><button class="btn primary" style="width:100%" id="authBtn">Login</button></form><div class="note muted">HTML-only version: account/application data এই browser-এর localStorage-এ থাকে। এটি server/database নয়।</div></div></section>
+<section id="services" class="view hidden">
+<h2>আমাদের সার্ভিস</h2>
+<div class="grid">
+<div class="card"><h3>📄 CV & Biodata</h3><p>Professional / Modern / Simple template বেছে নেওয়ার সুবিধা।</p><button class="btn primary" onclick="requireLogin('cv')">শুরু করুন</button></div>
+<div class="card"><h3>🔳 QR Code</h3><p>Mobile Banking, Social Media, Messaging, Website, vCard, Wi‑Fi এবং Custom.</p><button class="btn primary" onclick="requireLogin('qr')">শুরু করুন</button></div>
+</div>
+</section>
 
-<section id="dash" class="hide"><div class="actions" style="justify-content:space-between"><h2>My Dashboard</h2><button class="btn primary sm" onclick="App.show('home')">New Service</button></div><div class="stats"><div class="stat"><small>Total</small><b id="mt">0</b></div><div class="stat"><small>Pending</small><b id="mp">0</b></div><div class="stat"><small>Correction</small><b id="mc">0</b></div><div class="stat"><small>Completed</small><b id="ma">0</b></div></div><div class="card scroll"><table><thead><tr><th>Application</th><th>Service</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody id="mytable"></tbody></table></div></section>
+<section id="login" class="view hidden">
+<div class="form" style="max-width:480px">
+<h2 id="loginTitle">Login</h2>
+<p class="notice">এটি একটি single-file HTML demo। ডেটা এই ব্রাউজারের localStorage-এ থাকে।</p>
+<div class="field"><label>Email</label><input id="email" type="email" placeholder="example@gmail.com"></div><br>
+<div class="field"><label>Password</label><input id="password" type="password" placeholder="••••••••"></div><br>
+<button class="btn primary" onclick="login()">Login</button>
+<button class="btn secondary" onclick="register()">Create Account</button>
+<p id="loginMsg"></p>
+</div>
+</section>
 
-<section id="cv" class="hide"><div class="actions" style="justify-content:space-between"><h2>CV & Biodata Application</h2><button class="btn outline sm" onclick="Draft.save('cv')">Save Draft</button></div><div class="note">Optional তথ্য খালি রাখা যাবে। খালি তথ্য final CV-তে দেখানো হবে না।</div>
-<form id="cvform" onsubmit="CV.submit(event)">
-<div class="card"><h3>1. CV Template</h3><div class="grid"><label class="check"><input type="radio" name="template" value="professional" checked> Professional</label><label class="check"><input type="radio" name="template" value="modern"> Modern</label><label class="check"><input type="radio" name="template" value="minimal"> Minimal</label></div></div>
-<div class="card"><h3>2. Personal Information</h3><div class="grid2">
-<div class="fg"><label>Full Name *</label><input id="cname" required></div><div class="fg"><label>Mobile *</label><input id="cmobile" required></div><div class="fg"><label>Email</label><input id="cemail" type="email"></div><div class="fg"><label>Website</label><input id="cweb"></div><div class="fg"><label>Father's Name</label><input id="cfather"></div><div class="fg"><label>Mother's Name</label><input id="cmother"></div><div class="fg"><label>Date of Birth</label><input id="cdob" type="date"></div><div class="fg"><label>Nationality</label><input id="cnation"></div><div class="fg"><label>Gender</label><select id="cgender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div><div class="fg"><label>Marital Status</label><select id="cmarital"><option value="">Select</option><option>Single</option><option>Married</option><option>Other</option></select></div><div class="fg"><label>Height</label><input id="cheight"></div><div class="fg"><label>Weight</label><input id="cweight"></div>
-</div></div>
-<div class="card"><h3>3. Address</h3><div class="grid2"><div><label>Present</label><textarea id="cpresent"></textarea></div><div><label>Permanent</label><textarea id="cpermanent"></textarea></div></div><label class="check"><input type="checkbox" onchange="cpermanent.value=cpresent.value"> Same as present</label></div>
-<div class="card"><h3>4. Career Objective</h3><textarea id="cobjective"></textarea></div>
-<div class="card"><div class="actions" style="justify-content:space-between"><h3>5. Education</h3><button type="button" class="btn primary sm" onclick="CV.edu()">+ Add</button></div><div id="edulist"></div></div>
-<div class="card"><h3>6. Skills & Languages</h3><div class="fg"><label>Skills</label><input id="cskills" placeholder="MS Office, Graphic Design, Web Development"></div><div class="actions"><h4>Languages</h4><button type="button" class="btn primary sm" onclick="CV.lang()">+ Add</button></div><div id="langlist"></div></div>
-<div class="card"><div class="actions" style="justify-content:space-between"><h3>7. Work Experience</h3><button type="button" class="btn primary sm" onclick="CV.exp()">+ Add</button></div><div id="explist"></div></div>
-<div class="card"><h3>8. Supporting Documents</h3><input id="cfiles" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"><p class="muted">Selected file names will be recorded; HTML-only mode does not upload files to a server.</p></div>
-<div class="card"><button class="btn primary" style="width:100%">Submit CV Application</button></div></form></section>
+<section id="cv" class="view hidden">
+<div class="form">
+<h2>CV / Biodata Application</h2>
+<div class="notice">যে তথ্য প্রয়োজন নেই তা খালি রাখুন। খালি তথ্য CV-তে দেখানো হবে না।</div>
+<div class="section-title">ব্যক্তিগত তথ্য</div>
+<div class="form-grid">
+<div class="field"><label>পূর্ণ নাম</label><input id="cvName"></div>
+<div class="field"><label>মোবাইল</label><input id="cvPhone"></div>
+<div class="field"><label>Email</label><input id="cvEmail"></div>
+<div class="field"><label>জন্মতারিখ</label><input id="cvDob" type="date"></div>
+<div class="field"><label>পিতার নাম</label><input id="cvFather"></div>
+<div class="field"><label>মাতার নাম</label><input id="cvMother"></div>
+<div class="field"><label>জাতীয়তা</label><input id="cvNationality"></div>
+<div class="field"><label>লিঙ্গ</label><select id="cvGender"><option value="">--</option><option>Male</option><option>Female</option></select></div>
+<div class="field full"><label>Career Objective</label><textarea id="cvObjective"></textarea></div>
+<div class="field full"><label>Skills (comma separated)</label><input id="cvSkills"></div>
+</div>
+<div class="section-title">শিক্ষাগত যোগ্যতা</div>
+<div class="field"><textarea id="cvEducation" placeholder="যেমন: SSC — 2027 — XYZ School — GPA 5.00"></textarea></div>
+<div class="section-title">ঠিকানা</div>
+<div class="form-grid">
+<div class="field"><label>বর্তমান ঠিকানা</label><input id="cvPresent"></div>
+<div class="field"><label>স্থায়ী ঠিকানা</label><input id="cvPermanent"></div>
+</div>
+<br><button class="btn primary" onclick="submitCV()">আবেদন জমা দিন</button>
+<button class="btn secondary" onclick="show('home')">বাতিল</button>
+</div>
+</section>
 
-<section id="qr" class="hide"><div class="actions" style="justify-content:space-between"><h2>Smart QR Code Application</h2><button class="btn outline sm" onclick="Draft.save('qr')">Save Draft</button></div><div class="note">Admin approval না হওয়া পর্যন্ত final QR প্রকাশ হবে না।</div>
-<form onsubmit="QR.submit(event)">
-<div class="card"><h3>1. Basic Information</h3><div class="grid2"><div class="fg"><label>Name *</label><input id="qname" required></div><div class="fg"><label>QR Display Name</label><input id="qdisplay"></div><div class="fg"><label>Category *</label><select id="qcat" required onchange="QR.types()"><option value="">Select</option><option>Mobile Banking / Payment</option><option>Social Media</option><option>Messaging / Communication</option><option>Website / Online</option><option>Digital Content</option></select></div><div class="fg"><label>QR Type *</label><select id="qtype" required></select></div></div></div>
-<div class="card"><h3>2. QR Data</h3><div class="grid2"><div class="fg"><label>Mobile / Username / Link / Email / Text *</label><input id="qvalue" required></div><div class="fg"><label>Special Message</label><input id="qmsg"></div><div class="fg"><label>Address</label><textarea id="qaddress"></textarea></div><div class="fg"><label>Additional Information</label><textarea id="qextra"></textarea></div></div></div>
-<div class="card"><h3>3. Design</h3><div class="grid2"><div class="fg"><label>Card Title</label><input id="qtitle" value="SCAN ME"></div><div class="fg"><label>Footer</label><input id="qfooter" value="Powered by Salman Smart Service"></div></div></div>
-<div class="card"><button class="btn primary" style="width:100%">Submit QR Application</button></div></form></section>
+<section id="qr" class="view hidden">
+<div class="form">
+<h2>QR Code Application</h2>
+<div class="notice">Approval না হওয়া পর্যন্ত final QR প্রকাশিত হবে না।</div>
+<div class="form-grid">
+<div class="field"><label>QR-এ প্রদর্শিত নাম</label><input id="qrName"></div>
+<div class="field"><label>Category</label><select id="qrCat" onchange="updateQRTypes()">
+<option>Mobile Banking / Payment</option><option>Social Media</option><option>Messaging / Communication</option><option>Website / Online</option><option>Digital Content</option><option>Custom</option>
+</select></div>
+<div class="field"><label>QR Type</label><select id="qrType"></select></div>
+<div class="field"><label>মূল তথ্য / Link / Number</label><input id="qrValue" placeholder="Number, username, URL, text..."></div>
+<div class="field"><label>বিশেষ বার্তা (Optional)</label><input id="qrMessage"></div>
+<div class="field"><label>ঠিকানা (Optional)</label><input id="qrAddress"></div>
+<div class="field full"><label>অতিরিক্ত তথ্য (Optional)</label><textarea id="qrExtra"></textarea></div>
+</div><br>
+<button class="btn primary" onclick="submitQR()">QR আবেদন জমা দিন</button>
+<button class="btn secondary" onclick="show('home')">বাতিল</button>
+</div>
+</section>
 
-<section id="admin" class="hide"><div class="actions" style="justify-content:space-between"><h2><i class="fa-solid fa-shield-halved"></i> Admin Control Center</h2><button class="btn outline sm" onclick="Admin.render()">Refresh</button></div><div class="note warn">⚠️ HTML-only admin client-side। Source code দেখলে admin password/logic দেখা যেতে পারে। Real public security-এর জন্য backend প্রয়োজন।</div>
-<div class="stats"><div class="stat"><small>Users</small><b id="au">0</b></div><div class="stat"><small>Applications</small><b id="aa">0</b></div><div class="stat"><small>Pending</small><b id="ap">0</b></div><div class="stat"><small>Approved</small><b id="ok">0</b></div></div>
-<div class="card"><div class="actions" style="justify-content:space-between"><h3>All Applications</h3><select id="filter" onchange="Admin.renderApps()" style="max-width:220px"><option value="">All</option><option>pending</option><option>under_review</option><option>need_correction</option><option>approved</option><option>rejected</option><option>completed</option></select></div><div class="scroll"><table><thead><tr><th>Applicant</th><th>Service</th><th>Date</th><th>Status</th><th>Manage</th></tr></thead><tbody id="atable"></tbody></table></div></div>
-<div class="card"><h3>Registered Users</h3><div class="scroll"><table><thead><tr><th>Name</th><th>Email</th><th>Mobile</th><th>Joined</th></tr></thead><tbody id="utable"></tbody></table></div></div></section>
+<section id="applications" class="view hidden">
+<h2>আমার আবেদন</h2><div id="myApps"></div>
+</section>
+
+<section id="admin" class="view hidden">
+<h2>Admin Control Panel</h2>
+<div class="stats">
+<div class="stat"><span>Total</span><strong id="sTotal">0</strong></div>
+<div class="stat"><span>Pending</span><strong id="sPending">0</strong></div>
+<div class="stat"><span>Approved</span><strong id="sApproved">0</strong></div>
+<div class="stat"><span>Rejected</span><strong id="sRejected">0</strong></div>
+</div><br>
+<div class="card table-wrap"><table><thead><tr><th>ID</th><th>User</th><th>Service</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody id="adminApps"></tbody></table></div>
+</section>
 </main>
 
-<div id="modal" class="modal hide"><div class="modalbox"><div class="modalhead"><h2 id="mtitle"></h2><button class="close" onclick="Modal.close()">×</button></div><div id="mbody"></div></div></div>
+<div id="modal" class="modal hidden"><div class="modal-box"><div id="modalBody"></div><br><button class="btn secondary" onclick="closeModal()">Close</button></div></div>
+<footer>© 2026 Salman Smart Service — Professional Digital Service Platform</footer>
 
 <script>
-const CFG={ADMIN_EMAIL:"salmanfarshi1630@gmail.com",ADMIN_PASSWORD:"salman135",USERS:"sss_users",APPS:"sss_apps",SESSION:"sss_session",DCV:"sss_draft_cv",DQR:"sss_draft_qr"};
-const S={get(k,d=[]){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){localStorage.setItem(k,JSON.stringify(v))},del(k){localStorage.removeItem(k)},id(){return"app_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,7)},now(){return new Date().toISOString()}};
-const esc=x=>String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-const status=s=>{let c={pending:"pending",under_review:"review",need_correction:"correction",approved:"approved",rejected:"rejected",completed:"completed"}[s]||"pending";return`<span class="badge ${c}">${({pending:"Pending",under_review:"Under Review",need_correction:"Need Correction",approved:"Approved",rejected:"Rejected",completed:"Completed"})[s]||s}</span>`};
+/* =========================================================
+   SINGLE-FILE VERSION
+   IMPORTANT: browser/localStorage based. For a real public
+   production system, move authentication/database to a server.
+   ========================================================= */
 
-const Auth={
-  mode(m){lt.classList.toggle("active",m==="login");st.classList.toggle("active",m==="signup");signupBox.classList.toggle("hide",m!=="signup");authTitle.textContent=m==="signup"?"Create Account":"Login";authBtn.textContent=m==="signup"?"Create Account":"Login";authBtn.dataset.mode=m},
-  submit(e){e.preventDefault();let em=email.value.trim().toLowerCase(),pw=pass.value;if(authBtn.dataset.mode==="signup"){let us=S.get(CFG.USERS);if(em===CFG.ADMIN_EMAIL)return alert("Admin email reserved.");if(us.some(x=>x.email===em))return alert("Account already exists.");let u={id:S.id(),email:em,password:pw,name:uname.value.trim(),phone:uphone.value.trim(),created:S.now()};us.push(u);S.set(CFG.USERS,us);S.set(CFG.SESSION,{type:"user",id:u.id});App.show("dash")}else{if(em===CFG.ADMIN_EMAIL&&pw===CFG.ADMIN_PASSWORD){S.set(CFG.SESSION,{type:"admin"});App.show("admin");Admin.render()}else{let u=S.get(CFG.USERS).find(x=>x.email===em&&x.password===pw);if(!u)return alert("Email or password incorrect.");S.set(CFG.SESSION,{type:"user",id:u.id});App.show("dash")}}},
-  cur(){return S.get(CFG.SESSION,null)},user(){let s=this.cur();return s?.type==="user"?S.get(CFG.USERS).find(x=>x.id===s.id):null},admin(){return this.cur()?.type==="admin"},logout(){S.del(CFG.SESSION);App.show("home")}
-};
+// Change these two values before publishing if desired.
+// Do NOT use a real important password here.
+const ADMIN_EMAIL = "salmanfarshi1630@gmail.com";
+const ADMIN_PASSWORD = "CHANGE_THIS_ADMIN_PASSWORD";
 
-const App={
- show(x){document.querySelectorAll("main>section").forEach(s=>s.classList.add("hide"));document.getElementById(x).classList.remove("hide");this.nav();if(x==="dash")Dash.render();if(x==="admin")Admin.render();if(x==="cv")Draft.load("cv");if(x==="qr")Draft.load("qr")},
- nav(){let s=Auth.cur();adminNav.classList.toggle("hide",s?.type!=="admin");logoutNav.classList.toggle("hide",!s);loginNav.classList.toggle("hide",!!s)},
- need(x){if(!Auth.cur()){this.show("auth");return alert("প্রথমে Login / Create Account করুন।")}this.show(x)},
- lang(){alert("Language UI প্রস্তুত রাখা হয়েছে; মূল data bilingual-safe।")}
-};
+const KEY_USERS="sss_users_v1", KEY_APPS="sss_apps_v1", KEY_SESSION="sss_session_v1";
+const $=id=>document.getElementById(id);
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const getUsers=()=>JSON.parse(localStorage.getItem(KEY_USERS)||"[]");
+const getApps=()=>JSON.parse(localStorage.getItem(KEY_APPS)||"[]");
+const saveApps=a=>localStorage.setItem(KEY_APPS,JSON.stringify(a));
+const session=()=>JSON.parse(localStorage.getItem(KEY_SESSION)||"null");
 
-const CV={
- edu(d={}){let r=document.createElement("div");r.className="dynamic";r.innerHTML=`<button type="button" class="btn danger sm remove" onclick="this.parentElement.remove()">Remove</button><div class="grid2"><div><label>Exam / Degree</label><input class="ee" value="${esc(d.exam)}"></div><div><label>Passing Year</label><input class="ey" value="${esc(d.year)}"></div><div><label>Institute</label><input class="ei" value="${esc(d.inst)}"></div><div><label>GPA / Result</label><input class="er" value="${esc(d.result)}"></div></div>`;edulist.appendChild(r)},
- lang(d={}){let r=document.createElement("div");r.className="dynamic";r.innerHTML=`<button type="button" class="btn danger sm remove" onclick="this.parentElement.remove()">Remove</button><div class="grid2"><div><label>Language</label><input class="ln" value="${esc(d.name)}"></div><div><label>Proficiency</label><input class="ll" value="${esc(d.level)}"></div></div>`;langlist.appendChild(r)},
- exp(d={}){let r=document.createElement("div");r.className="dynamic";r.innerHTML=`<button type="button" class="btn danger sm remove" onclick="this.parentElement.remove()">Remove</button><div class="grid2"><div><label>Company</label><input class="ec" value="${esc(d.company)}"></div><div><label>Designation</label><input class="ed" value="${esc(d.desig)}"></div><div><label>Duration</label><input class="exd" value="${esc(d.duration)}"></div><div><label>Responsibilities</label><textarea class="exx">${esc(d.desc)}</textarea></div></div>`;explist.appendChild(r)},
- data(){let u=Auth.user();return{id:S.id(),userId:u.id,userName:u.name,email:u.email,service:"CV & Biodata",kind:"cv",status:"pending",created:S.now(),template:document.querySelector("input[name=template]:checked").value,data:{name:cname.value,mobile:cmobile.value,email:cemail.value,web:cweb.value,father:cfather.value,mother:cmother.value,dob:cdob.value,nation:cnation.value,gender:cgender.value,marital:cmarital.value,height:cheight.value,weight:cweight.value,present:cpresent.value,permanent:cpermanent.value,objective:cobjective.value,skills:cskills.value,edu:[...edulist.children].map(r=>({exam:r.querySelector(".ee").value,year:r.querySelector(".ey").value,inst:r.querySelector(".ei").value,result:r.querySelector(".er").value})).filter(x=>Object.values(x).some(Boolean)),lang:[...langlist.children].map(r=>({name:r.querySelector(".ln").value,level:r.querySelector(".ll").value})).filter(x=>Object.values(x).some(Boolean)),exp:[...explist.children].map(r=>({company:r.querySelector(".ec").value,desig:r.querySelector(".ed").value,duration:r.querySelector(".exd").value,desc:r.querySelector(".exx").value})).filter(x=>Object.values(x).some(Boolean)),files:[...cfiles.files].map(x=>x.name)}}},
- submit(e){e.preventDefault();let a=this.data(),x=S.get(CFG.APPS);x.push(a);S.set(CFG.APPS,x);S.del(CFG.DCV);alert("CV application submitted.");cvform.reset();edulist.innerHTML=langlist.innerHTML=explist.innerHTML="";this.edu();this.lang();this.exp();App.show("dash")}
-};
-
-const QTypes={
-"Mobile Banking / Payment":["bKash","Nagad","Rocket","Upay","mCash","CellFin","Tap","TallyPay","Pathao Pay","Other / Custom"],
-"Social Media":["Facebook","Instagram","TikTok","YouTube","X / Twitter","LinkedIn","Snapchat","Pinterest","Reddit","Telegram","Discord","Other / Custom"],
-"Messaging / Communication":["WhatsApp","IMO","Telegram","Messenger","Viber","Signal","Phone Number","Email","Other / Custom"],
-"Website / Online":["Website","Google Maps","Google Form","Portfolio","App / Play Store","Custom URL"],
-"Digital Content":["Text / Message","PDF Link","Image Link","Document Link","Contact / vCard","Wi-Fi","Custom QR"]};
-const QR={
- types(){qtype.innerHTML=(QTypes[qcat.value]||[]).map(x=>`<option>${x}</option>`).join("")},
- data(){let u=Auth.user();return{id:S.id(),userId:u.id,userName:u.name,email:u.email,service:"Smart QR Code",kind:"qr",status:"pending",created:S.now(),data:{name:qname.value,display:qdisplay.value,cat:qcat.value,type:qtype.value,value:qvalue.value,msg:qmsg.value,address:qaddress.value,extra:qextra.value,title:qtitle.value,footer:qfooter.value}}},
- submit(e){e.preventDefault();let a=this.data(),x=S.get(CFG.APPS);x.push(a);S.set(CFG.APPS,x);S.del(CFG.DQR);alert("QR application submitted.");e.target.reset();this.types();App.show("dash")},
- payload(a){let t=a.data.type,v=a.data.value;if(t==="WhatsApp")return"https://wa.me/"+v.replace(/\D/g,"");if(t==="Phone Number")return"tel:"+v;if(t==="Email")return"mailto:"+v;if(["Wi-Fi"].includes(t))return v.startsWith("WIFI:")?v:`WIFI:T:WPA;S:${v};P:;H:false;;`;if(["Website","Google Maps","Google Form","Portfolio","App / Play Store","Custom URL","Facebook","Instagram","TikTok","YouTube","X / Twitter","LinkedIn","Snapchat","Pinterest","Reddit","Telegram","Discord"].includes(t))return/^https?:\/\//i.test(v)?v:"https://"+v;return v},
- show(a){Modal.open("Approved QR",`<div class="qr" id="qrprint"><div class="muted">${esc(a.data.cat)} • ${esc(a.data.type)}</div><h2>${esc(a.data.title||"SCAN ME")}</h2><div id="qrcode"></div><div class="qrinfo">${a.data.display?`<p><b>Name:</b> ${esc(a.data.display)}</p>`:""}${a.data.msg?`<p><b>Message:</b> ${esc(a.data.msg)}</p>`:""}${a.data.address?`<p><b>Address:</b> ${esc(a.data.address)}</p>`:""}${a.data.extra?`<p><b>Info:</b> ${esc(a.data.extra)}</p>`:""}</div><p class="muted">${esc(a.data.footer||"Powered by Salman Smart Service")}</p></div><div class="actions" style="justify-content:center"><button class="btn primary" onclick="QR.png()">Download PNG</button><button class="btn outline" onclick="print()">Print</button></div>`);setTimeout(()=>new QRCode(qrcode,{text:this.payload(a),width:230,height:230,correctLevel:QRCode.CorrectLevel.H}),30)},
- png(){html2canvas(document.getElementById("qrprint"),{scale:3,backgroundColor:"#fff"}).then(c=>{let a=document.createElement("a");a.download="Salman-Smart-QR.png";a.href=c.toDataURL();a.click()})}
-};
-
-const Dash={render(){let u=Auth.user(),a=S.get(CFG.APPS).filter(x=>x.userId===u.id);mt.textContent=a.length;mp.textContent=a.filter(x=>x.status==="pending").length;mc.textContent=a.filter(x=>x.status==="need_correction").length;ma.textContent=a.filter(x=>["approved","completed"].includes(x.status)).length;mytable.innerHTML=a.length?a.map(x=>`<tr><td>${esc(x.id.slice(-7))}<br><span class="muted">${esc(x.email)}</span></td><td>${esc(x.service)}</td><td>${new Date(x.created).toLocaleDateString()}</td><td>${status(x.status)}</td><td><button class="btn outline sm" onclick="Details.open('${x.id}')">View</button>${x.kind==="qr"&&["approved","completed"].includes(x.status)?` <button class="btn primary sm" onclick="QR.show(S.get(CFG.APPS).find(z=>z.id==='${x.id}'))">QR</button>`:""}</td></tr>`).join(""):`<tr><td colspan=5 style="text-align:center;padding:30px">No applications</td></tr>`}};
-
-const Admin={
- render(){if(!Auth.admin())return;let a=S.get(CFG.APPS),u=S.get(CFG.USERS);au.textContent=u.length;aa.textContent=a.length;ap.textContent=a.filter(x=>x.status==="pending").length;ok.textContent=a.filter(x=>["approved","completed"].includes(x.status)).length;this.renderApps();utable.innerHTML=u.length?u.map(x=>`<tr><td>${esc(x.name||"—")}</td><td>${esc(x.email)}</td><td>${esc(x.phone||"—")}</td><td>${new Date(x.created).toLocaleDateString()}</td></tr>`).join(""):`<tr><td colspan=4>No users</td></tr>`},
- renderApps(){let f=filter.value,a=S.get(CFG.APPS).filter(x=>!f||x.status===f);atable.innerHTML=a.length?a.map(x=>`<tr><td><b>${esc(x.userName||"N/A")}</b><br><span class="muted">${esc(x.email)}</span></td><td>${esc(x.service)}</td><td>${new Date(x.created).toLocaleDateString()}</td><td>${status(x.status)}</td><td><button class="btn primary sm" onclick="Admin.manage('${x.id}')">Manage</button></td></tr>`).join(""):`<tr><td colspan=5 style="text-align:center;padding:30px">No applications</td></tr>`},
- manage(id){let a=S.get(CFG.APPS).find(x=>x.id===id);Modal.open("Admin Action",`<div class="note"><b>${esc(a.service)}</b><br>${esc(a.userName)} • ${esc(a.email)}</div><div class="fg"><label>Status</label><select id="newstatus"><option>pending</option><option>under_review</option><option>need_correction</option><option>approved</option><option>rejected</option><option>completed</option></select></div><div class="fg"><label>Admin Note / Instructions</label><textarea id="anote">${esc(a.note||"")}</textarea></div><button class="btn primary" onclick="Admin.save('${id}')">Save Changes</button>`);setTimeout(()=>newstatus.value=a.status,20)},
- save(id){let a=S.get(CFG.APPS),i=a.findIndex(x=>x.id===id);a[i].status=newstatus.value;a[i].note=anote.value;a[i].updated=S.now();a[i].history=a[i].history||[];a[i].history.push({status:a[i].status,at:S.now(),note:a[i].note});S.set(CFG.APPS,a);Modal.close();this.render();alert("Admin update saved.")}
-};
-
-const Details={open(id){let a=S.get(CFG.APPS).find(x=>x.id===id),d=a.data;let h=`<div class="note">${status(a.status)}<br><span class="muted">Submitted: ${new Date(a.created).toLocaleString()}</span></div><h3>${esc(a.service)}</h3>`;if(a.kind==="qr")h+=`<div class="grid2"><p><b>Name:</b> ${esc(d.name)}</p><p><b>Category:</b> ${esc(d.cat)}</p><p><b>Type:</b> ${esc(d.type)}</p><p><b>Value:</b> ${esc(d.value)}</p><p><b>Message:</b> ${esc(d.msg)}</p><p><b>Address:</b> ${esc(d.address)}</p></div>`;else h+=`<div class="grid2"><p><b>Name:</b> ${esc(d.name)}</p><p><b>Mobile:</b> ${esc(d.mobile)}</p><p><b>Email:</b> ${esc(d.email)}</p><p><b>Father:</b> ${esc(d.father)}</p><p><b>Mother:</b> ${esc(d.mother)}</p><p><b>Template:</b> ${esc(a.template)}</p></div><h4>Objective</h4><p>${esc(d.objective)}</p>`;if(a.note)h+=`<div class="note"><b>Admin Note:</b><br>${esc(a.note)}</div>`;if(a.kind==="qr"&&["approved","completed"].includes(a.status))h+=`<button class="btn primary" onclick="QR.show(S.get(CFG.APPS).find(x=>x.id==='${a.id}'))">Generate QR</button>`;Modal.open("Application Details",h)}};
-
-const Draft={
- save(t){let ids=t==="cv"?["cname","cmobile","cemail","cweb","cfather","cmother","cdob","cnation","cgender","cmarital","cheight","cweight","cpresent","cpermanent","cobjective","cskills"]:["qname","qdisplay","qcat","qtype","qvalue","qmsg","qaddress","qextra","qtitle","qfooter"];let o={};ids.forEach(id=>o[id]=document.getElementById(id).value);S.set(t==="cv"?CFG.DCV:CFG.DQR,o);alert("Draft saved.")},
- load(t){let o=S.get(t==="cv"?CFG.DCV:CFG.DQR,null);if(!o)return;Object.entries(o).forEach(([id,v])=>{let e=document.getElementById(id);if(e)e.value=v});if(t==="qr")QR.types()}
-};
-const Modal={open(t,b){mtitle.textContent=t;mbody.innerHTML=b;modal.classList.remove("hide")},close(){modal.classList.add("hide");mbody.innerHTML=""}};
-
-window.addEventListener("load",()=>{Auth.mode("login");CV.edu();CV.lang();CV.exp();QR.types();App.nav();});
+function escapeHTML(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function show(id){
+ document.querySelectorAll(".view").forEach(x=>x.classList.add("hidden"));
+ $(id).classList.remove("hidden");
+ if(id==="applications") renderMyApps();
+ if(id==="admin") renderAdmin();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function requireLogin(target){
+ if(!session()){show("login"); $("loginMsg").textContent="প্রথমে Login / Create Account করুন।"; return}
+ show(target);
+}
+function register(){
+ const email=$("email").value.trim().toLowerCase(), password=$("password").value;
+ if(!email||!password){$("loginMsg").textContent="Email ও password দিন।";return}
+ if(password.length<6){$("loginMsg").textContent="Password কমপক্ষে 6 অক্ষরের দিন।";return}
+ if(email===ADMIN_EMAIL){$("loginMsg").textContent="এই email admin account-এর জন্য নির্ধারিত।";return}
+ let u=getUsers(); if(u.some(x=>x.email===email)){ $("loginMsg").textContent="এই email আগে থেকেই আছে।";return}
+ u.push({id:uid(),email,password,createdAt:new Date().toISOString()});
+ localStorage.setItem(KEY_USERS,JSON.stringify(u));
+ $("loginMsg").textContent="Account তৈরি হয়েছে। এখন Login করুন।";
+}
+function login(){
+ const email=$("email").value.trim().toLowerCase(), password=$("password").value;
+ if(email===ADMIN_EMAIL && password===ADMIN_PASSWORD){
+   localStorage.setItem(KEY_SESSION,JSON.stringify({id:"ADMIN",email,role:"admin"}));
+   refreshNav(); show("admin"); return;
+ }
+ const u=getUsers().find(x=>x.email===email&&x.password===password);
+ if(!u){$("loginMsg").textContent="Email অথবা password সঠিক নয়।";return}
+ localStorage.setItem(KEY_SESSION,JSON.stringify({id:u.id,email:u.email,role:"user"}));
+ refreshNav(); show("home");
+}
+function logout(){localStorage.removeItem(KEY_SESSION);refreshNav();show("home")}
+function refreshNav(){
+ const s=session();
+ $("adminNav").classList.toggle("hidden",!s||s.role!=="admin");
+ $("authNav").classList.toggle("hidden",!!s); $("logoutNav").classList.toggle("hidden",!s);
+}
+function submitCV(){
+ const s=session(); if(!s)return show("login");
+ const app={id:uid(),userId:s.id,userEmail:s.email,service:"CV & Biodata",status:"pending",createdAt:new Date().toISOString(),
+ form:{name:$("cvName").value,phone:$("cvPhone").value,email:$("cvEmail").value,dob:$("cvDob").value,father:$("cvFather").value,mother:$("cvMother").value,nationality:$("cvNationality").value,gender:$("cvGender").value,objective:$("cvObjective").value,skills:$("cvSkills").value,education:$("cvEducation").value,present:$("cvPresent").value,permanent:$("cvPermanent").value}};
+ let a=getApps();a.unshift(app);saveApps(a);alert("CV আবেদন জমা হয়েছে।");show("applications");
+}
+function updateQRTypes(){
+ const cat=$("qrCat").value;
+ const map={
+ "Mobile Banking / Payment":["bKash","Nagad","Rocket","Upay","mCash","CellFin","Tap","TallyPay","Pathao Pay","Other Payment"],
+ "Social Media":["Facebook","Instagram","TikTok","YouTube","X / Twitter","LinkedIn","Snapchat","Pinterest","Reddit","Telegram","Other Social"],
+ "Messaging / Communication":["WhatsApp","IMO","Telegram","Messenger","Viber","Signal","Phone Number","Email"],
+ "Website / Online":["Website","Google Maps","Google Form","Portfolio","App / Play Store","Custom URL"],
+ "Digital Content":["Text / Message","PDF URL","Image URL","Document URL","Contact / vCard","Wi-Fi"],
+ "Custom":["Custom QR"]
+ };
+ $("qrType").innerHTML=map[cat].map(x=>`<option>${x}</option>`).join("");
+}
+function makePayload(a){
+ const v=a.form.value.trim(),t=a.form.type;
+ if(!v)return "";
+ if(t==="Phone Number")return "tel:"+v;
+ if(t==="Email")return "mailto:"+v;
+ if(t==="WhatsApp")return "https://wa.me/"+v.replace(/\D/g,"");
+ if(t==="Facebook"||t==="Instagram"||t==="TikTok"||t==="YouTube"||t==="LinkedIn"||t==="X / Twitter"||t==="Telegram"){
+   if(/^https?:\/\//i.test(v))return v;
+   const base={"Facebook":"https://facebook.com/","Instagram":"https://instagram.com/","TikTok":"https://tiktok.com/@","YouTube":"https://youtube.com/","LinkedIn":"https://linkedin.com/in/","X / Twitter":"https://x.com/","Telegram":"https://t.me/"}[t];
+   return base+v.replace(/^@/,"");
+ }
+ if(["Website","Google Maps","Google Form","Portfolio","App / Play Store","Custom URL","PDF URL","Image URL","Document URL"].includes(t)){
+   return /^https?:\/\//i.test(v)?v:"https://"+v;
+ }
+ return v;
+}
+function submitQR(){
+ const s=session();if(!s)return show("login");
+ const form={name:$("qrName").value,category:$("qrCat").value,type:$("qrType").value,value:$("qrValue").value,message:$("qrMessage").value,address:$("qrAddress").value,extra:$("qrExtra").value};
+ if(!form.value.trim()){alert("মূল তথ্য / Link / Number দিন।");return}
+ const app={id:uid(),userId:s.id,userEmail:s.email,service:"QR Code",status:"pending",createdAt:new Date().toISOString(),form};
+ let a=getApps();a.unshift(app);saveApps(a);alert("QR আবেদন জমা হয়েছে। Admin approval-এর পর final QR দেখা যাবে।");show("applications");
+}
+function statusBadge(s){return `<span class="badge ${s==="approved"||s==="completed"?"approved":s==="rejected"?"rejected":s==="need_correction"?"correction":"pending"}">${escapeHTML(s)}</span>`}
+function renderMyApps(){
+ const s=session(); if(!s){$("myApps").innerHTML='<div class="empty">Login করুন।</div>';return}
+ const apps=getApps().filter(a=>a.userId===s.id);
+ $("myApps").innerHTML=apps.length?`<div class="table-wrap"><table><thead><tr><th>ID</th><th>Service</th><th>Date</th><th>Status</th><th>View</th></tr></thead><tbody>${apps.map(a=>`<tr><td>${escapeHTML(a.id)}</td><td>${escapeHTML(a.service)}</td><td>${new Date(a.createdAt).toLocaleDateString()}</td><td>${statusBadge(a.status)}</td><td><button class="btn secondary" onclick="viewApp('${a.id}')">View</button></td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">কোনো আবেদন নেই।</div>';
+}
+function renderAdmin(){
+ const s=session();if(!s||s.role!=="admin"){show("home");return}
+ const apps=getApps();$("sTotal").textContent=apps.length;$("sPending").textContent=apps.filter(a=>a.status==="pending").length;$("sApproved").textContent=apps.filter(a=>a.status==="approved"||a.status==="completed").length;$("sRejected").textContent=apps.filter(a=>a.status==="rejected").length;
+ $("adminApps").innerHTML=apps.map(a=>`<tr><td>${escapeHTML(a.id)}</td><td>${escapeHTML(a.userEmail)}</td><td>${escapeHTML(a.service)}</td><td>${new Date(a.createdAt).toLocaleDateString()}</td><td>${statusBadge(a.status)}</td><td><button class="btn primary" onclick="adminView('${a.id}')">Manage</button></td></tr>`).join("");
+}
+function adminView(id){
+ const a=getApps().find(x=>x.id===id);if(!a)return;
+ $("modalBody").innerHTML=`<h2>Application ${escapeHTML(a.id)}</h2><p><b>User:</b> ${escapeHTML(a.userEmail)}</p><p><b>Service:</b> ${escapeHTML(a.service)}</p>
+ <label><b>Status</b></label><select id="newStatus" style="width:100%;padding:10px;margin:7px 0 12px"><option value="pending">pending</option><option value="under_review">under_review</option><option value="need_correction">need_correction</option><option value="approved">approved</option><option value="rejected">rejected</option><option value="completed">completed</option></select>
+ <label><b>Admin Note</b></label><textarea id="adminNote" style="width:100%;min-height:90px;padding:10px">${escapeHTML(a.adminNote||"")}</textarea>
+ <br><br><button class="btn primary" onclick="saveAdmin('${a.id}')">Save & Update</button>
+ <button class="btn secondary" onclick="viewApp('${a.id}')">Preview</button>`;
+ $("newStatus").value=a.status; $("modal").classList.remove("hidden");
+}
+function saveAdmin(id){
+ const apps=getApps(),a=apps.find(x=>x.id===id);if(!a)return;
+ a.status=$("newStatus").value;a.adminNote=$("adminNote").value;a.updatedAt=new Date().toISOString();
+ if(a.status==="approved"||a.status==="completed"){a.approvedAt=new Date().toISOString();a.downloadAllowed=true}else a.downloadAllowed=false;
+ saveApps(apps);closeModal();renderAdmin();alert("Admin action saved successfully.");
+}
+function viewApp(id){
+ const a=getApps().find(x=>x.id===id);if(!a)return;
+ let body=`<h2>${escapeHTML(a.service)}</h2><p><b>Status:</b> ${statusBadge(a.status)}</p><p><b>Application ID:</b> ${escapeHTML(a.id)}</p>`;
+ if(a.adminNote)body+=`<div class="notice"><b>Admin Note:</b> ${escapeHTML(a.adminNote)}</div>`;
+ if(a.service==="QR Code" && (a.status==="approved"||a.status==="completed")){
+   body+=`<div class="qr-card"><div class="scan">SCAN ME</div><h2>${escapeHTML(a.form.name||a.form.type)}</h2><div id="qrRender" class="qr-box"></div><div class="qr-meta">${escapeHTML(a.form.message||"")}${a.form.address?`<br>${escapeHTML(a.form.address)}`:""}</div><small>Powered by Salman Smart Service</small></div>`;
+ }else if(a.service==="QR Code"){
+   body+=`<p>QR details: ${escapeHTML(a.form.type)} — ${escapeHTML(a.form.value)}</p><p>Approval হওয়ার পর QR দেখা যাবে।</p>`;
+ }else{
+   const f=a.form;body+=`<h3>Personal Information</h3><p><b>Name:</b> ${escapeHTML(f.name)}</p><p><b>Mobile:</b> ${escapeHTML(f.phone)}</p><p><b>Email:</b> ${escapeHTML(f.email)}</p>${f.objective?`<p><b>Objective:</b> ${escapeHTML(f.objective)}</p>`:""}${f.skills?`<p><b>Skills:</b> ${escapeHTML(f.skills)}</p>`:""}`;
+   if(a.status==="approved"||a.status==="completed")body+=`<div class="notice">CV approved. এই single-file version-এ print/PDF করতে browser-এর Print → Save as PDF ব্যবহার করুন।</div>`;
+ }
+ $("modalBody").innerHTML=body;$("modal").classList.remove("hidden");
+ if(a.service==="QR Code"&&(a.status==="approved"||a.status==="completed")){
+   setTimeout(()=>new QRCode($("qrRender"),{text:makePayload(a),width:190,height:190,correctLevel:QRCode.CorrectLevel.H}),50);
+ }
+}
+function closeModal(){$("modal").classList.add("hidden")}
+function toggleLang(){alert("English interface-এর পূর্ণ i18n পরবর্তী version-এ যোগ করা যাবে।")}
+updateQRTypes();refreshNav();show("home");
 </script>
 </body>
 </html>
